@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import type { Destination, TravelerCount } from '../types'
 import { calculatePlan, formatINR } from '../lib/costs'
+import { countSelectedActivities, selectedActivityTotals } from '../lib/planning'
 import { CostBreakdown } from './CostBreakdown'
 import { PlannerCard } from './PlannerCard'
-import { TravelerSelector } from './TravelerSelector'
+import { TripSummary } from './TripSummary'
 
 interface TripPlannerProps {
   destinations: Destination[]
@@ -24,16 +25,10 @@ export function TripPlanner({
   onRemoveDestination,
   onClear,
 }: TripPlannerProps) {
-  const activityTotals = useMemo(() => {
-    return destinations.reduce((acc, destination) => {
-      const selected = savedActivityIds(destination.id)
-      const sum = destination.activities
-        .filter((activity) => selected.has(activity.id))
-        .reduce((total, activity) => total + activity.price, 0)
-      acc[destination.id] = sum
-      return acc
-    }, {} as Record<string, number>)
-  }, [destinations, savedActivityIds])
+  const activityTotals = useMemo(
+    () => selectedActivityTotals(destinations, savedActivityIds),
+    [destinations, savedActivityIds],
+  )
 
   const plan = useMemo(
     () =>
@@ -47,12 +42,10 @@ export function TripPlanner({
     [destinations, activityTotals, travelers],
   )
 
-  const selectedActivitiesCount = useMemo(() => {
-    return destinations.reduce(
-      (count, destination) => count + savedActivityIds(destination.id).size,
-      0,
-    )
-  }, [destinations, savedActivityIds])
+  const selectedActivitiesCount = useMemo(
+    () => countSelectedActivities(destinations, savedActivityIds),
+    [destinations, savedActivityIds],
+  )
 
   if (destinations.length === 0) {
     return (
@@ -73,21 +66,13 @@ export function TripPlanner({
 
   return (
     <section id="trip" className="trip" aria-labelledby="trip-title">
-      <div className="trip__head">
-        <div>
-          <h2 id="trip-title">My Trip</h2>
-          <p className="trip__subtitle">
-            {selectedCount} {selectedCount === 1 ? 'destination' : 'destinations'}{' '}
-            &middot; {selectedActivitiesCount} activities selected
-          </p>
-        </div>
-        <div className="trip__controls">
-          <TravelerSelector travelers={travelers} onChange={onTravelersChange} />
-          <button type="button" className="btn btn--ghost btn--sm" onClick={onClear}>
-            Clear trip
-          </button>
-        </div>
-      </div>
+      <TripSummary
+        destinationCount={selectedCount}
+        selectedActivitiesCount={selectedActivitiesCount}
+        travelers={travelers}
+        onTravelersChange={onTravelersChange}
+        onClear={onClear}
+      />
 
       <div className="trip__cost" role="status" aria-live="polite">
         <p className="trip__cost-label">Estimated cost</p>

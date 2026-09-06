@@ -162,6 +162,7 @@ button {
   text-decoration: none;
   color: var(--text-strong);
   border-radius: var(--radius-sm);
+  min-width: 0;
 }
 
 .brand__name {
@@ -182,6 +183,7 @@ button {
   padding: 0;
   display: flex;
   gap: 6px;
+  min-width: 0;
 }
 
 .site-nav__link {
@@ -252,6 +254,7 @@ main {
   font-size: 18px;
   color: var(--text-muted);
   max-width: 52ch;
+  overflow-wrap: anywhere;
 }
 
 .hero__search {
@@ -431,6 +434,7 @@ main {
 .results__count {
   color: var(--text-muted);
   font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
 .grid {
@@ -512,6 +516,7 @@ main {
   font-size: 20px;
   color: var(--text-strong);
   letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
 }
 
 .card__country {
@@ -719,6 +724,7 @@ main {
   color: var(--text-muted);
   font-size: 14px;
   font-weight: 400;
+  overflow-wrap: anywhere;
 }
 
 .trip__cost-total strong {
@@ -822,6 +828,7 @@ main {
 .trip__subtitle {
   color: var(--text-muted);
   font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
 .trip__list {
@@ -852,11 +859,13 @@ main {
 .planner-card__head h3 {
   font-size: 18px;
   color: var(--text-strong);
+  overflow-wrap: anywhere;
 }
 
 .planner-card__sub {
   font-size: 13px;
   color: var(--text-muted);
+  overflow-wrap: anywhere;
 }
 
 .planner-card__days {
@@ -916,6 +925,8 @@ main {
 .detail-dialog__topbar h2 {
   font-size: 22px;
   color: var(--text-strong);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .detail-dialog__media {
@@ -985,6 +996,8 @@ main {
 
 .detail-dialog__activity-title {
   font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .detail-dialog__days li > span:last-child {
