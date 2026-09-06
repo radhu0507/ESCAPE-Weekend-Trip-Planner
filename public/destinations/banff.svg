@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#ecfeff"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  
+<circle cx="400" cy="170" r="72" fill="#f8fafc"/>
+<circle cx="400" cy="170" r="88" fill="#f8fafc" opacity="0.22"/>
+<polygon points="0,360 150,180 250,295 390,130 525,300 645,210 800,325 800,430 0,430" fill="#64748b"/>
+<polygon points="0,420 190,245 330,330 475,205 620,330 725,265 800,330 800,500 0,500" fill="#475569"/>
+<polyline points="158,214 174,186 190,218" fill="#f8fafc" stroke="#475569" stroke-width="6"/>
+<polyline points="370,144 396,106 438,162" fill="#f8fafc" stroke="#475569" stroke-width="9"/>
+<polyline points="472,214 490,181 510,216" fill="#f8fafc" stroke="#475569" stroke-width="6"/>
+<path d="M0 420 Q 200 395 400 408 T 800 400 L 800 500 L 0 500 Z" fill="url(#water)"/>
+<path d="M250 446 Q 400 435 560 452" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.5"/>
+
+</svg>

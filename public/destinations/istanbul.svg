@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#93c5fd"/>
+      <stop offset="1" stop-color="#fef9c3"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#0369a1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  
+<circle cx="580" cy="150" r="64" fill="#fefce8"/>
+<circle cx="580" cy="150" r="80" fill="#fefce8" opacity="0.2"/>
+<rect x="0" y="300" width="800" height="200" fill="#94a3b8"/>
+<rect x="40" y="260" width="70" height="240" fill="#334155"/>
+<rect x="140" y="300" width="95" height="200" fill="#334155"/>
+<rect x="270" y="240" width="80" height="260" fill="#334155"/>
+<rect x="380" y="300" width="110" height="200" fill="#334155"/>
+<rect x="520" y="220" width="70" height="280" fill="#334155"/>
+<rect x="620" y="280" width="120" height="220" fill="#334155"/>
+<rect x="180" y="180" width="46" height="200" fill="#1d4ed8" rx="3"/>
+<path d="M203 126 l22 40 l-10 2 l0 18 l-24 0 l0 -18 l-10 -2 Z" fill="#1e3a8a"/>
+<rect x="0" y="330" width="800" height="170" fill="#e2e8f0"/>
+<rect x="60" y="300" width="90" height="200" fill="#e2e8f0" opacity="0.85"/>
+<rect x="430" y="290" width="120" height="210" fill="#e2e8f0" opacity="0.85"/>
+<rect x="680" y="300" width="90" height="200" fill="#e2e8f0" opacity="0.85"/>
+<path d="M0 470 L 800 470 L 800 500 L 0 500 Z" fill="[object Object]"/>
+<path d="M180 470 Q 200 452 220 470" stroke="none" fill="[object Object]" opacity="0.7"/>
+
+</svg>

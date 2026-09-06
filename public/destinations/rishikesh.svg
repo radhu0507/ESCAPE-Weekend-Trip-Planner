@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdba74"/>
+      <stop offset="1" stop-color="#ffedd5"/>
+    </linearGradient>
+    
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  
+<circle cx="200" cy="140" r="60" fill="#fff7ed"/>
+<circle cx="200" cy="140" r="74" fill="#fff7ed" opacity="0.22"/>
+<path d="M0 320 Q 200 250 400 300 T 800 280 L 800 400 L 0 400 Z" fill="#65a30d"/>
+<path d="M0 400 Q 300 320 620 380 T 800 360 L 800 500 L 0 500 Z" fill="#3f6212"/>
+<path d="M0 470 Q 260 410 560 460 T 800 440 L 800 500 L 0 500 Z" fill="#1a2e05"/>
+<path d="M110 470 Q 130 428 160 396 L 170 402 Q 150 438 138 470 Z" fill="#1a2e05" opacity="0.9"/>
+<path d="M600 470 Q 610 440 626 424 L 632 428 Q 624 442 618 470 Z" fill="#1a2e05" opacity="0.9"/>
+<path d="M60 260 Q 260 300 460 240 T 760 270 L 760 -20 L 60 -20 Z" fill="#fef3c7" opacity="0.5"/>
+<path d="M0 430 Q 200 380 420 420 T 800 400 L 800 500 L 0 500 Z" fill="[object Object]"/>
+
+</svg>
