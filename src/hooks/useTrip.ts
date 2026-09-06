@@ -3,6 +3,8 @@ import { ACTIVITY_LOOKUP, DESTINATION_IDS } from '../data/destinations'
 import { clearStoredTrip, loadTrip, saveTrip } from '../lib/tripStore'
 import type { TripState } from '../types'
 
+const EMPTY_ACTIVITY_IDS: ReadonlySet<string> = new Set()
+
 /**
  * Owns the user's weekend trip. State is kept in sync with localStorage on
  * every change; anything read back is validated against known ids.
@@ -26,12 +28,18 @@ export function useTrip() {
     [savedDestinationIds],
   )
 
+  const activitySets = useMemo(() => {
+    const sets = new Map<string, ReadonlySet<string>>()
+    for (const entry of trip.entries) {
+      sets.set(entry.destinationId, new Set(entry.activityIds))
+    }
+    return sets
+  }, [trip.entries])
+
   const savedActivityIds = useCallback(
-    (destinationId: string): ReadonlySet<string> => {
-      const entry = trip.entries.find((e) => e.destinationId === destinationId)
-      return new Set(entry?.activityIds ?? [])
-    },
-    [trip.entries],
+    (destinationId: string): ReadonlySet<string> =>
+      activitySets.get(destinationId) ?? EMPTY_ACTIVITY_IDS,
+    [activitySets],
   )
 
   const toggleDestination = useCallback((destinationId: string) => {

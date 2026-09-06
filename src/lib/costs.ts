@@ -11,6 +11,13 @@ export interface PlanCost {
   breakdown: CostBreakdown
 }
 
+export const BREAKDOWN_ROWS: readonly ['stay', 'food', 'transport', 'activities'] = [
+  'stay',
+  'food',
+  'transport',
+  'activities',
+]
+
 export const BREAKDOWN_LABELS: Record<keyof CostBreakdown, string> = {
   stay: 'Stay',
   food: 'Food',

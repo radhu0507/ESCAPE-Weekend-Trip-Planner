@@ -16,7 +16,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { TripPlanner } from './components/TripPlanner'
-import type { TravelerCount } from './components/TripPlanner'
+import type { TravelerCount } from './types'
 
 const INITIAL_FILTERS: Filters = { search: '', budgets: [], types: [], region: 'all' }
 

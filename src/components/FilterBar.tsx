@@ -1,13 +1,18 @@
-import { BUDGET_LABELS, REGION_LABELS, REGION_OPTIONS, TYPE_LABELS } from '../types'
+import {
+  BUDGET_LABELS,
+  BUDGET_OPTIONS,
+  REGION_LABELS,
+  REGION_OPTIONS,
+  TYPE_LABELS,
+  TYPE_OPTIONS,
+} from '../types'
 import type { Budget, Filters, RegionFilter, TripType } from '../types'
+import { ChoiceChip } from './ChoiceChip'
 
 interface FilterBarProps {
   filters: Filters
   onFiltersChange: (filters: Filters) => void
 }
-
-const BUDGETS = Object.keys(BUDGET_LABELS) as Budget[]
-const TYPES = Object.keys(TYPE_LABELS) as TripType[]
 
 export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
   const toggleBudget = (budget: Budget) => {
@@ -40,16 +45,15 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
             <legend>Region</legend>
             <div className="chip-group" role="group" aria-label="Region">
               {REGION_OPTIONS.map((region) => (
-                <label key={region} className="chip">
-                  <input
-                    type="radio"
-                    name="region"
-                    value={region}
-                    checked={filters.region === region}
-                    onChange={() => setRegion(region)}
-                  />
-                  <span>{REGION_LABELS[region]}</span>
-                </label>
+                <ChoiceChip
+                  key={region}
+                  type="radio"
+                  name="region"
+                  checked={filters.region === region}
+                  onChange={() => setRegion(region)}
+                >
+                  {REGION_LABELS[region]}
+                </ChoiceChip>
               ))}
             </div>
           </fieldset>
@@ -57,16 +61,16 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
           <fieldset className="filterbar__fieldset">
             <legend>Budget</legend>
             <div className="chip-group" role="group" aria-label="Budget">
-              {BUDGETS.map((budget) => (
-                <label key={budget} className="chip">
-                  <input
-                    type="checkbox"
-                    name={`budget-${budget}`}
-                    checked={filters.budgets.includes(budget)}
-                    onChange={() => toggleBudget(budget)}
-                  />
-                  <span>{BUDGET_LABELS[budget]}</span>
-                </label>
+              {BUDGET_OPTIONS.map((budget) => (
+                <ChoiceChip
+                  key={budget}
+                  type="checkbox"
+                  name={`budget-${budget}`}
+                  checked={filters.budgets.includes(budget)}
+                  onChange={() => toggleBudget(budget)}
+                >
+                  {BUDGET_LABELS[budget]}
+                </ChoiceChip>
               ))}
             </div>
           </fieldset>
@@ -74,16 +78,16 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
           <fieldset className="filterbar__fieldset">
             <legend>Trip type</legend>
             <div className="chip-group" role="group" aria-label="Trip type">
-              {TYPES.map((type) => (
-                <label key={type} className="chip">
-                  <input
-                    type="checkbox"
-                    name={`type-${type}`}
-                    checked={filters.types.includes(type)}
-                    onChange={() => toggleType(type)}
-                  />
-                  <span>{TYPE_LABELS[type]}</span>
-                </label>
+              {TYPE_OPTIONS.map((type) => (
+                <ChoiceChip
+                  key={type}
+                  type="checkbox"
+                  name={`type-${type}`}
+                  checked={filters.types.includes(type)}
+                  onChange={() => toggleType(type)}
+                >
+                  {TYPE_LABELS[type]}
+                </ChoiceChip>
               ))}
             </div>
           </fieldset>

@@ -9,6 +9,9 @@ export type ActivitySlot = 'morning' | 'afternoon' | 'evening'
 /** Day index within a two-day weekend trip. 0 == Saturday, 1 == Sunday. */
 export type DayIndex = 0 | 1
 
+/** Number of travelers a plan is priced for; 5 means "5 or more". */
+export type TravelerCount = 1 | 2 | 3 | 4 | 5
+
 export interface Activity {
   id: string
   title: string
@@ -65,6 +68,17 @@ export const REGION_LABELS: Record<RegionFilter, string> = {
 }
 
 export const REGION_OPTIONS: readonly RegionFilter[] = ['all', 'india', 'international']
+
+export const BUDGET_OPTIONS: readonly Budget[] = ['budget', 'mid', 'premium']
+
+export const TYPE_OPTIONS: readonly TripType[] = [
+  'beach',
+  'mountain',
+  'city',
+  'nature',
+  'food',
+  'adventure',
+]
 
 export const TYPE_LABELS: Record<TripType, string> = {
   beach: 'Beach',

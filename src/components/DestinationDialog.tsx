@@ -67,6 +67,7 @@ export function DestinationDialog({
           alt=""
           width="800"
           height="500"
+          decoding="async"
         />
 
         <div className="detail-dialog__meta">

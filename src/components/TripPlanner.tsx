@@ -1,12 +1,9 @@
 import { useMemo } from 'react'
-import type { Destination } from '../types'
-import { DAY_LABELS } from '../types'
-import { BREAKDOWN_LABELS, calculatePlan, formatINR } from '../lib/costs'
-import type { CostBreakdown } from '../lib/costs'
-
-export type TravelerCount = 1 | 2 | 3 | 4 | 5
-
-const TRAVELER_OPTIONS: readonly TravelerCount[] = [1, 2, 3, 4, 5]
+import type { Destination, TravelerCount } from '../types'
+import { calculatePlan, formatINR } from '../lib/costs'
+import { CostBreakdown } from './CostBreakdown'
+import { PlannerCard } from './PlannerCard'
+import { TravelerSelector } from './TravelerSelector'
 
 interface TripPlannerProps {
   destinations: Destination[]
@@ -17,13 +14,6 @@ interface TripPlannerProps {
   onRemoveDestination: (destinationId: string) => void
   onClear: () => void
 }
-
-const BREAKDOWN_ROWS: readonly (keyof CostBreakdown)[] = [
-  'stay',
-  'food',
-  'transport',
-  'activities',
-]
 
 export function TripPlanner({
   destinations,
@@ -92,23 +82,7 @@ export function TripPlanner({
           </p>
         </div>
         <div className="trip__controls">
-          <fieldset className="travelers">
-            <legend>Number of travelers</legend>
-            <div className="chip-group" role="group" aria-label="Number of travelers">
-              {TRAVELER_OPTIONS.map((option) => (
-                <label key={option} className="chip">
-                  <input
-                    type="radio"
-                    name="travelers"
-                    value={option}
-                    checked={travelers === option}
-                    onChange={() => onTravelersChange(option)}
-                  />
-                  <span>{option === 5 ? '5+' : option}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          <TravelerSelector travelers={travelers} onChange={onTravelersChange} />
           <button type="button" className="btn btn--ghost btn--sm" onClick={onClear}>
             Clear trip
           </button>
@@ -126,30 +100,7 @@ export function TripPlanner({
         </p>
       </div>
 
-      <table className="cost-breakdown">
-        <caption className="visually-hidden">Cost breakdown</caption>
-        <thead>
-          <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Per person</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {BREAKDOWN_ROWS.map((row) => (
-            <tr key={row}>
-              <th scope="row">{BREAKDOWN_LABELS[row]}</th>
-              <td>{formatINR(plan.breakdown[row])}</td>
-              <td>{formatINR(plan.breakdown[row] * travelers)}</td>
-            </tr>
-          ))}
-          <tr className="cost-breakdown__total">
-            <th scope="row">Estimated cost</th>
-            <td>{formatINR(plan.perPerson)}</td>
-            <td>{formatINR(plan.total)}</td>
-          </tr>
-        </tbody>
-      </table>
+      <CostBreakdown plan={plan} travelers={travelers} />
 
       <div className="trip__list">
         {destinations.map((destination) => (
@@ -166,79 +117,5 @@ export function TripPlanner({
         ))}
       </div>
     </section>
-  )
-}
-
-interface PlannerCardProps {
-  destination: Destination
-  activitiesTotal: number
-  savedActivityIds: ReadonlySet<string>
-  onToggleActivity: (activityId: string) => void
-  onRemove: () => void
-}
-
-function PlannerCard({
-  destination,
-  activitiesTotal,
-  savedActivityIds,
-  onToggleActivity,
-  onRemove,
-}: PlannerCardProps) {
-  const perPerson = destination.costPerPerson + activitiesTotal
-  const activitiesCount = destination.activities.length
-
-  return (
-    <article className="planner-card" aria-labelledby={`planner-${destination.id}-title`}>
-      <div className="planner-card__head">
-        <div>
-          <h3 id={`planner-${destination.id}-title`}>
-            {destination.name}, {destination.country}
-          </h3>
-          <p className="planner-card__sub">
-            Est. {formatINR(perPerson)} / person &middot;{' '}
-            {savedActivityIds.size}/{activitiesCount} activities selected
-            {activitiesTotal > 0 ? ` (+${formatINR(activitiesTotal)})` : ''}
-          </p>
-        </div>
-        <button
-          type="button"
-          className="btn btn--ghost btn--sm"
-          aria-label={`Remove ${destination.name} from trip`}
-          onClick={onRemove}
-        >
-          Remove
-        </button>
-      </div>
-
-      <div className="planner-card__days">
-        {DAY_LABELS.map((dayLabel, dayIndex) => (
-          <fieldset key={dayLabel} className="planner-card__day">
-            <legend>{dayLabel}</legend>
-            <div className="chip-group chip-group--wrap" role="group">
-              {destination.activities
-                .filter((activity) => activity.day === dayIndex)
-                .map((activity) => {
-                  const active = savedActivityIds.has(activity.id)
-                  return (
-                    <label key={activity.id} className="chip chip--variant">
-                      <input
-                        type="checkbox"
-                        name={activity.id}
-                        checked={active}
-                        onChange={() => onToggleActivity(activity.id)}
-                      />
-                      <span>
-                        {activity.title}
-                        {activity.price > 0 ? ` · ${formatINR(activity.price)}` : ' · Free'}{' '}
-                        <em>· {activity.durationMinutes} min</em>
-                      </span>
-                    </label>
-                  )
-                })}
-            </div>
-          </fieldset>
-        ))}
-      </div>
-    </article>
   )
 }

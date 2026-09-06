@@ -26,6 +26,7 @@ export function DestinationCard({
           width="800"
           height="500"
           loading="lazy"
+          decoding="async"
         />
         <span className="card__badge">
           {BUDGET_LABELS[destination.budget]}
