@@ -911,6 +911,8 @@ main {
   display: flex;
   flex-direction: column;
   max-height: 86vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .detail-dialog__topbar {
@@ -983,7 +985,7 @@ main {
 
 .detail-dialog__days li {
   display: grid;
-  grid-template-columns: 70px 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 8px;
   align-items: baseline;
 }
@@ -992,6 +994,8 @@ main {
   color: var(--text-muted);
   font-size: 12px;
   text-transform: uppercase;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .detail-dialog__activity-title {
@@ -1111,10 +1115,6 @@ main {
   .cost-breakdown th[scope='col']:not(:first-child),
   .cost-breakdown td:not(:first-child) {
     text-align: left;
-  }
-
-  .detail-dialog__days li {
-    grid-template-columns: 56px 1fr auto;
   }
 
   .cost-breakdown th[scope='row'] {
