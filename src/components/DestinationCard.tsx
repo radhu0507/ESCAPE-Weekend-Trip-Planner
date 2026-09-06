@@ -1,6 +1,7 @@
 import type { Destination } from '../types'
 import { BUDGET_LABELS, TYPE_LABELS } from '../types'
 import { formatINR } from '../lib/costs'
+import { Rating } from './Rating'
 
 interface DestinationCardProps {
   destination: Destination
@@ -31,15 +32,7 @@ export function DestinationCard({
         <span className="card__badge">
           {BUDGET_LABELS[destination.budget]}
         </span>
-        <span className="card__rating" aria-label={`Rated ${destination.rating} out of 5`}>
-          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-            <path
-              d="M12 2l2.9 6.2 6.6.7-4.9 4.5 1.3 6.5L12 16.9 6.1 19.9l1.3-6.5L2.5 8.9l6.6-.7z"
-              fill="currentColor"
-            />
-          </svg>
-          {destination.rating}
-        </span>
+        <Rating className="card__rating" rating={destination.rating} />
       </div>
       <div className="card__body">
         <h3 id={`${destination.id}-title`} className="card__title">

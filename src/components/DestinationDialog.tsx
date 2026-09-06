@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import type { Destination } from '../types'
 import { DAY_LABELS, SLOT_LABELS } from '../types'
 import { formatINR } from '../lib/costs'
+import { Rating } from './Rating'
 
 interface DestinationDialogProps {
   destination: Destination | null
@@ -76,15 +77,11 @@ export function DestinationDialog({
             <strong>{formatINR(destination.costPerPerson)} / person</strong> &middot;{' '}
             {destination.distanceKm.toLocaleString()} km away
           </p>
-          <p className="detail-dialog__rating" aria-label={`Rated ${destination.rating} out of 5`}>
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-              <path
-                d="M12 2l2.9 6.2 6.6.7-4.9 4.5 1.3 6.5L12 16.9 6.1 19.9l1.3-6.5L2.5 8.9l6.6-.7z"
-                fill="currentColor"
-              />
-            </svg>
-            {destination.rating} ({destination.reviews.toLocaleString()} reviews)
-          </p>
+          <Rating
+            className="detail-dialog__rating"
+            rating={destination.rating}
+            reviews={destination.reviews}
+          />
         </div>
 
         <p className="detail-dialog__blurb">{destination.blurb}</p>
