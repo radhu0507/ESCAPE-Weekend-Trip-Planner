@@ -1,5 +1,5 @@
 import type { Destination } from '../types'
-import { DAY_LABELS } from '../types'
+import { DAY_LABELS, SLOT_LABELS, SLOT_OPTIONS } from '../types'
 import { formatINR } from '../lib/costs'
 import { ChoiceChip } from './ChoiceChip'
 
@@ -48,26 +48,43 @@ export function PlannerCard({
         {DAY_LABELS.map((dayLabel, dayIndex) => (
           <fieldset key={dayLabel} className="planner-card__day">
             <legend>{dayLabel}</legend>
-            <div className="chip-group chip-group--wrap" role="group">
-              {destination.activities
-                .filter((activity) => activity.day === dayIndex)
-                .map((activity) => {
-                  const active = savedActivityIds.has(activity.id)
-                  return (
-                    <ChoiceChip
-                      key={activity.id}
-                      type="checkbox"
-                      name={activity.id}
-                      variant="activity"
-                      checked={active}
-                      onChange={() => onToggleActivity(activity.id)}
+            <div className="planner-card__slots">
+              {SLOT_OPTIONS.map((slot) => {
+                const activities = destination.activities.filter(
+                  (activity) => activity.day === dayIndex && activity.slot === slot,
+                )
+                if (activities.length === 0) return null
+                return (
+                  <div key={slot} className="planner-card__slot">
+                    <p className="planner-card__slot-label">{SLOT_LABELS[slot]}</p>
+                    <div
+                      className="chip-group chip-group--wrap"
+                      role="group"
+                      aria-label={`${dayLabel} ${SLOT_LABELS[slot]}`}
                     >
-                      {activity.title}
-                      {activity.price > 0 ? ` · ${formatINR(activity.price)}` : ' · Free'}{' '}
-                      <em>· {activity.durationMinutes} min</em>
-                    </ChoiceChip>
-                  )
-                })}
+                      {activities.map((activity) => {
+                        const active = savedActivityIds.has(activity.id)
+                        return (
+                          <ChoiceChip
+                            key={activity.id}
+                            type="checkbox"
+                            name={activity.id}
+                            variant="activity"
+                            checked={active}
+                            onChange={() => onToggleActivity(activity.id)}
+                          >
+                            {activity.title}
+                            <em> · {activity.durationMinutes} min</em>
+                            {activity.price > 0
+                              ? ` · ${formatINR(activity.price)}`
+                              : ' · Free'}
+                          </ChoiceChip>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </fieldset>
         ))}

@@ -96,3 +96,6 @@ export const SLOT_LABELS: Record<ActivitySlot, string> = {
   afternoon: 'Afternoon',
   evening: 'Evening',
 }
+
+/** Canonical time-period order for a trip day. */
+export const SLOT_OPTIONS: readonly ActivitySlot[] = ['morning', 'afternoon', 'evening']

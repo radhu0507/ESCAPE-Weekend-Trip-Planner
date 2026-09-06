@@ -54,7 +54,7 @@ function App() {
     <>
       <Header />
 
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Hero search={filters.search} onSearchChange={handleSearchChange} />
 
         <FilterBar filters={filters} onFiltersChange={setFilters} />

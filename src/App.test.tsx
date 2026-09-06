@@ -45,4 +45,26 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Reset filters' }))
     expect(screen.queryByText('No destinations match your filters.')).not.toBeInTheDocument()
   })
+
+  it('opens and closes the destination details dialog', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getAllByRole('button', { name: 'Details' })[0])
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Santorini, Greece' }),
+    ).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Close details' }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('closes the details dialog with the Escape key', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getAllByRole('button', { name: 'Details' })[0])
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    screen.getByRole('button', { name: 'Close details' }).focus()
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
 })

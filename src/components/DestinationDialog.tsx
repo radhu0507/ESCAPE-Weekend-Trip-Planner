@@ -40,6 +40,9 @@ export function DestinationDialog({
       className="detail-dialog"
       aria-labelledby={titleId}
       onCancel={onClose}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') onClose()
+      }}
       onClick={(event) => {
         if (event.target === dialogRef.current) onClose()
       }}
@@ -99,7 +102,10 @@ export function DestinationDialog({
                       <span className="detail-dialog__activity-title">
                         {activity.title}
                       </span>
-                      <span>{activity.price === 0 ? 'Free' : formatINR(activity.price)}</span>
+                      <span>
+                        {activity.price === 0 ? 'Free' : formatINR(activity.price)} ·{' '}
+                        {activity.durationMinutes} min
+                      </span>
                     </li>
                   ))}
               </ul>

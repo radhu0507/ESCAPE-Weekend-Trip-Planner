@@ -7,11 +7,12 @@
   --text-muted: #6f675c;
   --text-strong: #1b1712;
   --accent: #f97316;
-  --accent-strong: #ea580c;
+  --accent-strong: #bd3c0a;
+  --accent-deep: #bd3c0a;
   --accent-soft: #ffedd5;
   --sea: #0ea5e9;
   --border: #e7e0d6;
-  --ring: #f97316;
+  --ring: var(--accent-strong);
   --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.05);
   --shadow-md: 0 10px 30px -12px rgba(28, 25, 23, 0.18);
   --radius-lg: 18px;
@@ -159,6 +160,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  min-height: 44px;
   text-decoration: none;
   color: var(--text-strong);
   border-radius: var(--radius-sm);
@@ -187,7 +189,9 @@ button {
 }
 
 .site-nav__link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 8px 14px;
   border-radius: 999px;
   color: var(--text);
@@ -362,8 +366,10 @@ main {
 }
 
 .chip span {
-  display: inline-block;
-  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
   border-radius: 999px;
   background: var(--surface-2);
   border: 1px solid transparent;
@@ -491,7 +497,7 @@ main {
 
 .card__badge {
   left: 12px;
-  background: rgba(27, 23, 18, 0.55);
+  background: rgba(27, 23, 18, 0.72);
   color: #fff;
 }
 
@@ -591,6 +597,7 @@ main {
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 10px 18px;
+  min-height: 44px;
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
@@ -599,16 +606,17 @@ main {
 
 .btn--sm {
   padding: 7px 13px;
+  min-height: 44px;
   font-size: 13px;
 }
 
 .btn--solid {
-  background: var(--accent);
+  background: var(--accent-deep);
   color: #fff;
 }
 
 .btn--solid:hover {
-  background: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent-deep) 82%, #000);
 }
 
 .btn--outline {
@@ -635,8 +643,8 @@ main {
 
 .btn--icon {
   padding: 8px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: transparent;
   color: var(--text);
@@ -888,6 +896,26 @@ main {
   letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-bottom: 10px;
+}
+
+.planner-card__slots {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.planner-card__slot {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.planner-card__slot-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
 
 /* ---------- Detail dialog ---------- */
